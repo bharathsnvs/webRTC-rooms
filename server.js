@@ -33,18 +33,19 @@ const peers = io.of("/webrtcPeer");
 let connectedPeers = new Map();
 
 peers.on("connection", (socket) => {
+  connectedPeers.set(socket.id, socket);
+
   console.log(socket.id);
   socket.emit("connection-success", {
     success: socket.id,
     peerCount: connectedPeers.size,
   });
 
-  const broackcast = () => socket.broadcast.emit('joined-peers', {
-    peerCount: connectedPeers.size,
-  })
-  broadcast()
-
-  connectedPeers.set(socket.id, socket);
+  const broadcast = () =>
+    socket.broadcast.emit("joined-peers", {
+      peerCount: connectedPeers.size,
+    });
+  broadcast();
 
   const disconnectedPeer = (socketID) =>
     socket.broadcast.emit("peer-disconnected", {
@@ -61,7 +62,7 @@ peers.on("connection", (socket) => {
   socket.on("onlinePeers", (data) => {
     for (const [socketID, _socket] of connectedPeers.entries()) {
       //don't send to self
-      if (socketID !== data.socketID) {
+      if (socketID !== data.socketID.local) {
         console.log("online-peer", data.socketID, socketID);
         socket.emit("online-peer", socketID);
       }
@@ -87,6 +88,7 @@ peers.on("connection", (socket) => {
         socket.emit("answer", {
           sdp: data.payload,
           socketID: data.socketID.local,
+          
         });
       }
     }
@@ -113,6 +115,7 @@ peers.on("connection", (socket) => {
         socket.emit("candidate", {
           candidate: data.payload,
           socketID: data.socketID.local,
+          peerCount: connectedPeers.size,
         });
       }
     }
