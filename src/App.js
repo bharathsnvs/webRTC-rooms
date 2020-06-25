@@ -358,7 +358,7 @@ class App extends Component {
           {statusText}
         </div>
 
-        <div>
+        <div >
           <AllVideos
             switchVideo={this.switchVideo}
             remoteStreams={this.state.remoteStreams}
