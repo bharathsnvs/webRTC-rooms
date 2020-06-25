@@ -114,38 +114,6 @@ class App extends Component {
 
       pc.setRemoteDescription(new RTCSessionDescription)
     }
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection
-    // create an instance of RTCPeerConnection
-    // this.pc = new RTCPeerConnection(this.state.pc_config);
-
-    // triggered when a new candidate is returned
-    //this.pc.onicecandidate = (e) => {
-      // send the candidates to the remote peer
-      // see addCandidate below to be triggered on the remote peer
-     // if (e.candidate) {
-        // console.log(JSON.stringify(e.candidate))
-       // this.sendToPeer("candidate", e.candidate);
-    //  }
-    //};
-
-    // triggered when there is a change in connection state
-    //this.pc.oniceconnectionstatechange = (e) => {
-    //  console.log(e);
-    //};
-
-    // triggered when a stream is added to pc, see below - this.pc.addStream(stream)
-    // this.pc.onaddstream = (e) => {
-    //   this.remoteVideoref.current.srcObject = e.stream
-    // }
-
-    //this.pc.ontrack = (e) => {
-    //  debugger;
-      //this.remoteVideoref.current.srcObject = e.streams[0]
-    //  this.setState({
-    //    remoteStream: e.streams[0],
-    //  });
-    //};
   };
 
   getLocalStream = () => {
@@ -261,36 +229,7 @@ class App extends Component {
     }
   }
 
-  /* ACTION METHODS FROM THE BUTTONS ON SCREEN */
-
-  //createOffer = () => {
-  //  console.log("Offer");
-
-    // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createOffer
-    // initiates the creation of SDP
-  //  this.pc.createOffer(this.state.sdpConstraints).then((sdp) => {
-      // console.log(JSON.stringify(sdp))
-
-      // set offer sdp as local description
-  //    this.pc.setLocalDescription(sdp);
-
-  //    this.sendToPeer("offerOrAnswer", sdp);
-  //  });
-  //};
-
-  // https://developer.mozilla.org/en-US/docs/Web/API/RTCPeerConnection/createAnswer
-  // creates an SDP answer to an offer received from remote peer
-  //createAnswer = () => {
-  //  console.log("Answer");
-  //  this.pc.createAnswer(this.state.sdpConstraints).then((sdp) => {
-  //    // console.log(JSON.stringify(sdp))
-
-      // set answer sdp as local description
-  //    this.pc.setLocalDescription(sdp);
-  //
-  //    this.sendToPeer("offerOrAnswer", sdp);
-  //  });
-  //};
+  
 
   setRemoteDescription = () => {
     // retrieve and parse the SDP copied from the remote peer
