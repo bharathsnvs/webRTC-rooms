@@ -33,7 +33,8 @@ class App extends Component {
       },
     };
 
-    this.serviceIP = "https://7af1173b5089.ngrok.io/webrtcPeer";
+    //this.serviceIP = "https://7af1173b5089.ngrok.io/webrtcPeer";
+    this.serviceIP = "https://vast-lake-45146.herokuapp.com/webrtcPeer"
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     //this.localVideoref = React.createRef()
@@ -315,7 +316,7 @@ class App extends Component {
         <Video
           videoStyle={{
             zIndex: 2,
-            position: "absolute",
+            position: "fixed",
             right: 0,
             width: 240,
             height: 240,
@@ -358,7 +359,7 @@ class App extends Component {
           {statusText}
         </div>
 
-        <div >
+        <div>
           <AllVideos
             switchVideo={this.switchVideo}
             remoteStreams={this.state.remoteStreams}
