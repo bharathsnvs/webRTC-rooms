@@ -229,30 +229,6 @@ class App extends Component {
     }
   }
 
-  
-
-  setRemoteDescription = () => {
-    // retrieve and parse the SDP copied from the remote peer
-    const desc = JSON.parse(this.textref.value);
-
-    // set sdp as remote description
-    this.pc.setRemoteDescription(new RTCSessionDescription(desc));
-  };
-
-  addCandidate = () => {
-    // retrieve and parse the Candidate copied from the remote peer
-    // const candidate = JSON.parse(this.textref.value)
-    // console.log('Adding candidate:', candidate)
-
-    // add the candidate to the peer connection
-    // this.pc.addIceCandidate(new RTCIceCandidate(candidate))
-
-    this.candidates.forEach((candidate) => {
-      console.log(JSON.stringify(candidate));
-      this.pc.addIceCandidate(new RTCIceCandidate(candidate));
-    });
-  };
-
   render() {
     console.log(this.state.localStream);
     return (
