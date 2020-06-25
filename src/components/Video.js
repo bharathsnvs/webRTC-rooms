@@ -25,7 +25,7 @@ class Video extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ ...this.props.frameStyle }}>
         <video
           id={this.props.id}
           muted={this.props.muted}

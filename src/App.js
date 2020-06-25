@@ -315,7 +315,7 @@ class App extends Component {
         <Video
           videoStyle={{
             zIndex: 2,
-            position: "fixed",
+            position: "absolute",
             right: 0,
             width: 240,
             height: 240,
