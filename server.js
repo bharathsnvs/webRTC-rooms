@@ -54,7 +54,7 @@ peers.on("connection", (socket) => {
   console.log(socket.id);
   socket.emit("connection-success", {
     success: socket.id,
-    peerCount: connectedPeers.size,
+    peerCount: rooms[room].size,
   });
 
   // const broadcast = () =>
@@ -63,7 +63,7 @@ peers.on("connection", (socket) => {
   //   });
   const broadcast = () => {
     const _connectedPeers = rooms[room];
-    for (const [socketID, _socket] of _connectedPeers.entres()) {
+    for (const [socketID, _socket] of _connectedPeers.entries()) {
       if (socketID !== socket.id) {
         _socket.emit("joined-peers", {
           peerCount: rooms[room].size,
@@ -82,7 +82,7 @@ peers.on("connection", (socket) => {
   const disconnectedPeer = (socketID) => {
     const _connectedPeers = rooms[room];
     for (const [_socketID, _socket] of _connectedPeers.entries()) {
-      _socket.emit("joined-peers", {
+      _socket.emit("peer-disconnected", {
         peerCount: rooms[room].size,
         socketID,
       });
@@ -154,7 +154,7 @@ peers.on("connection", (socket) => {
         socket.emit("candidate", {
           candidate: data.payload,
           socketID: data.socketID.local,
-          //peerCount: connectedPeers.size,
+          peerCount: rooms[room].size,
         });
       }
     }
