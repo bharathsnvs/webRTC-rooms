@@ -33,8 +33,7 @@ class App extends Component {
       },
     };
 
-    this.serviceIP = "https://4a80e31c45f1.ngrok.io/webrtcPeer";
-    //this.serviceIP = "https://vast-lake-45146.herokuapp.com/webrtcPeer"
+    this.serviceIP = "https://def65f6b5a5e.ngrok.io/webrtcPeer";
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     //this.localVideoref = React.createRef()
@@ -180,7 +179,9 @@ class App extends Component {
   componentDidMount = () => {
     this.socket = io.connect(this.serviceIP, {
       path: "/io/webrtc",
-      query: {},
+      query: {
+        room: window.location.pathname,
+      },
     });
 
     this.socket.on("connection-success", (data) => {
@@ -189,12 +190,20 @@ class App extends Component {
       console.log(data.success);
       const status =
         data.peerCount > 1
-          ? `Total Connected Peers: ${data.peerCount}`
+          ? `Peers in room ${window.location.pathname}: ${data.peerCount}`
           : "Waiting for Peers";
 
       this.setState({
         //connecting,
         status: status,
+      });
+    });
+
+    this.socket.on("joined-peers", (data) => {
+      this.setState({
+        status: data.peerCount > 1
+          ? `Peers in room ${window.location.pathname}: ${data.peerCount}`
+          : "Waiting for Peers"
       });
     });
 
@@ -213,15 +222,14 @@ class App extends Component {
             : null;
 
         const status =
-        data.peerCount > 1
-          ? `Total Connected Peers: ${data.peerCount}`
-          : "Waiting for Peers";
+          data.peerCount > 1
+            ? `Peers in room ${window.location.pathname}: ${data.peerCount}`
+            : "Waiting for Peers";
 
         return {
           remoteStreams,
           ...selectedVideo,
-          status: status
-          
+          status: status,
         };
       });
     });
@@ -246,8 +254,8 @@ class App extends Component {
           : "Waiting for Peers";
 
       this.setState({
-        status: status
-      })
+        status: status,
+      });
     });
 
     this.socket.on("online-peer", (socketID) => {
@@ -296,7 +304,6 @@ class App extends Component {
       ).then(() => {});
     });
   };
-  
 
   switchVideo = (_video) => {
     console.log(_video);
@@ -307,7 +314,7 @@ class App extends Component {
 
   render() {
     console.log(this.state.localStream);
-    console.log(this.state.peerConnections)
+    console.log(this.state.peerConnections);
     const statusText = (
       <div style={{ color: "ghostwhite", padding: 5 }}>{this.state.status}</div>
     );
