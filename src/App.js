@@ -33,7 +33,7 @@ class App extends Component {
       },
     };
 
-    this.serviceIP = "https://def65f6b5a5e.ngrok.io/webrtcPeer";
+    this.serviceIP = "https://863a1f3ad027.ngrok.io/webrtcPeer";
 
     // https://reactjs.org/docs/refs-and-the-dom.html
     //this.localVideoref = React.createRef()
