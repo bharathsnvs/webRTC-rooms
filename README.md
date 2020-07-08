@@ -1,3 +1,7 @@
+Built to understand webRTC and how it can be used to host communication channels between peers. 
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
