@@ -1,5 +1,5 @@
 Built to understand webRTC and how it can be used to host communication channels between peers. 
-
+Tested multi room functionality via ngrok, which lets you set up a tunnel with https.
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
